@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic[email]
+beautifulsoup4
+requests
+langchain
+langchain-google-genai
+python-dotenv
+google-search-results
+langchain-community
