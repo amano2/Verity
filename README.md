@@ -106,4 +106,4 @@ Verity is designed with security in mind:
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
-*Built with ❤️ by [amano2](https://github.com/amano2) & Antigravity.*
+*Built by [amano2](https://github.com/amano2).*
