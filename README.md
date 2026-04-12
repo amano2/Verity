@@ -1,16 +1,17 @@
 # 📰 Verity: AI-Powered News Verifier
 
-**Verity** is a state-of-the-art multimodal news verification platform designed to combat misinformation. It combines deep web scraping, factual claim extraction via Large Language Models (LLMs), and real-time cross-referencing to provide users with a "Truth Score" for any news article.
+**Verity** is a state-of-the-art multimodal news verification platform designed to combat misinformation in the digital age. It combines robust web scraping, factual claim extraction via advanced Large Language Models (LLMs), and real-time cross-referencing to provide a comprehensive "Truth Score" for any news article.
 
 ---
 
 ## ✨ Features
 
-- **Automated Article Scraping**: Cleanly extracts content, headlines, and metadata from any news URL.
-- **AI Claim Extraction**: Uses **Google Gemini 2.5 Flash** to identify 3-5 core, verifiable factual claims.
-- **Real-Time Cross-Referencing**: Searches the live web using **DuckDuckGo** to find supporting or contradicting evidence.
-- **Reliability Meter**: Calculates a factual integrity score and provides a detailed verdict (True, Mostly True, Misleading, False) for every claim.
-- **Premium Newspaper UI**: A bespoke, parchment-toned interface designed for professional journalism.
+- **Automated Article Scraping**: Cleanly extracts headlines, authors, publish dates, and body text from any news URL, stripping away ads and boilerplate.
+- **AI Claim Extraction**: Leverages **Llama 3.3 70B (via OpenRouter)** to identify the most critical, verifiable factual claims from long-form content.
+- **Real-Time Cross-Referencing**: Performs live web searches using **DuckDuckGo** to find supporting evidence or contradicting reports.
+- **Intelligent Truth Scoring**: Calculates a factual integrity score (0-100) based on cross-referenced evidence and provides detailed verdicts for each claim.
+- **Premium Newspaper UI**: A bespoke, parchment-toned interface that evokes the gravitas of traditional journalism with modern, responsive features.
+- **Built-in Resilience**: Implements strict rate-limiting (to respect free-tier API quotas) and robust retry logic via **Tenacity**.
 
 ---
 
@@ -18,15 +19,17 @@
 
 ### Backend
 - **Framework**: FastAPI (Python 3.10+)
-- **AI Orchestration**: Google GenAI SDK & LangChain
-- **Search**: DuckDuckGo Search API
+- **LLM**: Meta Llama 3.3 70B Instruct (via **OpenRouter**)
+- **AI Orchestration**: OpenAI-compatible API integration
+- **Search**: DuckDuckGo Search API (LangChain integration)
 - **Scraping**: BeautifulSoup4
-- **Resilience**: Tenacity (Retry logic for API stability)
+- **Resilience**: Tenacity (Retry logic) & Asyncio (Non-blocking operations)
 
 ### Frontend
 - **Framework**: React.js with Vite
-- **Styling**: Vanilla CSS (Newspaper Theme)
+- **Styling**: Vanilla CSS (Premium Newspaper Theme)
 - **Typography**: DM Serif Display & Lora (Google Fonts)
+- **UX**: Dynamic multi-step progress indicators ("Printing Press" mode)
 
 ---
 
@@ -35,7 +38,7 @@
 ### Prerequisites
 - [Python 3.10+](https://www.python.org/downloads/)
 - [Node.js & npm](https://nodejs.org/)
-- [Google Gemini API Key](https://aistudio.google.com/app/apikey)
+- [OpenRouter API Key](https://openrouter.ai/)
 
 ### 1. Backend Setup
 1. Navigate to the `backend/` directory:
@@ -54,7 +57,8 @@
 4. Configure environment variables:
    Create a `.env` file in the `backend/` folder:
    ```env
-   GOOGLE_API_KEY="YOUR_KEY_HERE"
+   OPENROUTER_API_KEY="YOUR_OPENROUTER_KEY_HERE"
+   OPENROUTER_MODEL="meta-llama/llama-3.3-70b-instruct:free"
    ```
 
 ### 2. Frontend Setup
@@ -74,7 +78,7 @@
 1. **Launch the Backend**:
    From the `backend/` folder, run:
    ```bash
-   uvicorn main:app --reload
+   uvicorn main:app --reload --port 8000
    ```
    *The API will be available at `http://localhost:8000`.*
 
@@ -83,27 +87,28 @@
    ```bash
    npm run dev
    ```
-   *Open `http://localhost:5173` in your browser.*
+   *Open the URL shown in your terminal (usually `http://localhost:5173`).*
 
 3. **Verify an Article**:
    - Copy a news article URL (e.g., from BBC, Reuters, or CNN).
    - Paste it into the central search bar in Verity.
-   - Click **"Verify Article"**.
-   - Wait for the "Printing Press" to finish analysis.
+   - Click **"Analyze"**.
+   - Watch the **"Printing Press"** status indicators as the AI scrapes, extracts, and verifies claims.
 
 4. **Review Results**:
-   - Scroll through the **Factual Integrity Score**.
-   - Review each **Claim Card** to see the verdict, confidence level, and source links.
+   - Check the **Integrity Assessment** score and reliability label.
+   - Review each **Factual Evidence Card** to see the verdict, explanation, and confidence level.
 
 ---
 
-## 🛡️ Security & Privacy
-Verity is designed with security in mind:
-- **Environment Variables**: API keys are stored in excluded `.env` files.
-- **Rate Limiting**: Integrated retry logic handles Gemini free-tier limits gracefully.
+## 🛡️ Stability & Limits
+Verity is optimized for free-tier reliability:
+- **Rate Limiting**: The system deliberately spaces claim verification calls (approx. 8 seconds apart) to respect OpenRouter's free-tier limits (8 req/min).
+- **Concurrency**: Operations are asynchronous to ensure the UI remains responsive during long-running verification tasks.
 
 ## ⚖️ License
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 *Built by [amano2](https://github.com/amano2).*
+

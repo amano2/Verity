@@ -31,7 +31,7 @@ const App = () => {
     }, 2000);
 
     try {
-      const response = await fetch('http://localhost:8000/api/verify', {
+      const response = await fetch('http://localhost:8001/api/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url })
@@ -57,7 +57,26 @@ const App = () => {
   };
 
   return (
-    <div className="container">
+    <div className="app-wrapper">
+      <nav className="sticky-nav">
+        <div className="nav-content">
+          <div className="nav-logo">
+            <div className="logo-box">
+              <svg className="shield-icon-small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+            <span>Verity</span>
+          </div>
+          <div className="nav-links">
+            <a href="#how-it-works">How it works</a>
+            <a href="#methodology">Methodology</a>
+            <a href="#api">API</a>
+          </div>
+        </div>
+      </nav>
+      <div className="container">
       <header>
         <div className="header-meta">
           <span>Daily Edition</span>
@@ -167,6 +186,44 @@ const App = () => {
           </section>
         </div>
       )}
+      </div>
+
+      <footer className="dark-footer">
+        <div className="footer-content">
+          <div className="footer-brand-section">
+            <div className="footer-logo">
+              <svg className="shield-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+              <span>Verity</span>
+            </div>
+            <p className="footer-desc">
+              Empowering global citizens with AI-driven news verification tools to combat misinformation and promote media literacy.
+            </p>
+          </div>
+          
+          <div className="footer-links-section">
+            <div className="footer-nav-column">
+              <h4>RESOURCES</h4>
+              <ul>
+                <li><a href="#" className="animated-link">Documentation</a></li>
+                <li><a href="#" className="animated-link">Fact-check DB</a></li>
+                <li><a href="#" className="animated-link">Browser Extension</a></li>
+              </ul>
+            </div>
+            
+            <div className="footer-nav-column">
+              <h4>CONNECT</h4>
+              <ul>
+                <li><a href="#" className="animated-link">Twitter</a></li>
+                <li><a href="#" className="animated-link">GitHub</a></li>
+                <li><a href="#" className="animated-link">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
